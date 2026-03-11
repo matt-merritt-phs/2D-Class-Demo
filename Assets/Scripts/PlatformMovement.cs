@@ -6,6 +6,7 @@ public class PlatformMovement : MonoBehaviour
     public float moveSpeed;
     public Rigidbody2D rb;
     public SpriteRenderer spr;
+    public Animator anim;
 
     // Do not display this in the editor, the code will manage it
     private float movementInput;
@@ -43,6 +44,15 @@ public class PlatformMovement : MonoBehaviour
     {
         // Update the player sprite before moving them
         spr.flipX = flipped;
+
+        if (movementInput != 0)
+        {
+            anim.SetBool("Walking", true);
+        }
+        else
+        {
+            anim.SetBool("Walking", false);
+        }
 
         // Smooth movement between two positions, but adjusts the player back upwards (slows the gravity)
         // rb.MovePosition(rb.position + Vector2.right * movementInput * moveSpeed * Time.fixedDeltaTime);
