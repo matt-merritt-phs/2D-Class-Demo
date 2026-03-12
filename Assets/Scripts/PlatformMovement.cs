@@ -5,6 +5,7 @@ public class PlatformMovement : MonoBehaviour
     // Do display in the editor, it is set on the script
     public float moveSpeed;
     public Rigidbody2D rb;
+    public SpriteRenderer spr;
 
     // Do not display this in the editor, the code will manage it
     private float movementInput;
@@ -29,6 +30,16 @@ public class PlatformMovement : MonoBehaviour
     // Called once per PHYSICS frame
     void FixedUpdate()
     {
+        // Have the player face the direction they are moving in
+        if (movementInput > 0)
+        {
+            spr.flipX = false;
+        }
+        if (movementInput < 0)
+        {
+            spr.flipX = true;
+        }
+
         // Smooth movement between two positions, but adjusts the player back upwards (slows the gravity)
         // rb.MovePosition(rb.position + Vector2.right * movementInput * moveSpeed * Time.fixedDeltaTime);
 
