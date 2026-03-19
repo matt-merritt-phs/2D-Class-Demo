@@ -11,6 +11,7 @@ public class PlatformMovement : MonoBehaviour
     // Do not display this in the editor, the code will manage it
     private float movementInput;
     private bool flipped;
+    private bool sprinting;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -37,6 +38,18 @@ public class PlatformMovement : MonoBehaviour
         {
             flipped = true;
         }
+
+        // Sprinting
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            sprinting = true;
+            moveSpeed *= 2;
+        }
+        if (Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            sprinting = false;
+            moveSpeed /= 2;
+        }
     }
 
     // Called once per PHYSICS frame
@@ -53,6 +66,8 @@ public class PlatformMovement : MonoBehaviour
         {
             anim.SetBool("Walking", false);
         }
+
+        anim.SetBool("Running", sprinting);
 
         // Smooth movement between two positions, but adjusts the player back upwards (slows the gravity)
         // rb.MovePosition(rb.position + Vector2.right * movementInput * moveSpeed * Time.fixedDeltaTime);
