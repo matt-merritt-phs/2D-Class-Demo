@@ -3,7 +3,7 @@ using UnityEngine;
 public class PlatformMovement : MonoBehaviour
 {
     // Do display in the editor, it is set on the script
-    public float moveSpeed;
+    public float moveSpeed, jumpForce;
     public Rigidbody2D rb;
     public SpriteRenderer spr;
     public Animator anim;
@@ -36,6 +36,12 @@ public class PlatformMovement : MonoBehaviour
         if (movementInput < 0)
         {
             flipped = true;
+        }
+
+        // Jumping
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
         }
     }
 
