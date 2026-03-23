@@ -355,7 +355,7 @@ GameObject:
   - component: {fileID: 903805973}
   - component: {fileID: 903805971}
   - component: {fileID: 903805974}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -480,6 +480,8 @@ MonoBehaviour:
   rb: {fileID: 903805971}
   spr: {fileID: 903805968}
   anim: {fileID: 903805974}
+  playerLayer: 6
+  distanceToGround: 0.75
 --- !u!61 &903805973
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -949,7 +951,7 @@ Transform:
   m_GameObject: {fileID: 1768706644}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -2.75, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

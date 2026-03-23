@@ -7,15 +7,25 @@ public class PlatformMovement : MonoBehaviour
     public Rigidbody2D rb;
     public SpriteRenderer spr;
     public Animator anim;
+    public int playerLayer;
+    public float distanceToGround;
 
     // Do not display this in the editor, the code will manage it
     private float movementInput;
     private bool flipped;
+    private bool onGround;
+    private int physicsLayer;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        // Creating a layer mask to use
+        // Read more about this here: https://docs.unity3d.com/Manual/use-layers.html
+
+        // shifting a bit, necessary for the layers to be understood by program
+        playerLayer = 1 << playerLayer;
+        // for the physics layer, make it everything that is not in the player layer
+        physicsLayer = ~playerLayer;
     }
 
     // Update is called once per frame
@@ -39,7 +49,7 @@ public class PlatformMovement : MonoBehaviour
         }
 
         // Jumping
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && onGround)
         {
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
         }
@@ -65,5 +75,24 @@ public class PlatformMovement : MonoBehaviour
 
         // Movement with rigidbody (inside the physics system) 
         rb.position += Vector2.right * movementInput * moveSpeed * Time.fixedDeltaTime;
+
+        // Raycasts for checking if jump is possible
+
+        // Normal Raycast
+
+        // This will always hit the player, options are to move it down or to use layers
+        // RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, distanceToGround + 0.1f);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, distanceToGround + 0.1f, physicsLayer);
+
+        if (hit)
+        {
+            onGround = true;
+            Debug.Log(hit.collider.name);
+        }
+        else
+        {
+            onGround = false;
+            Debug.Log("No hits");
+        }
     }
 }
