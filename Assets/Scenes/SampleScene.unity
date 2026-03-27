@@ -565,6 +565,7 @@ MonoBehaviour:
   spr: {fileID: 903805968}
   anim: {fileID: 0}
   playerHeight: 0
+  data: {fileID: 0}
 --- !u!95 &903805973
 Animator:
   serializedVersion: 7
@@ -712,6 +713,7 @@ MonoBehaviour:
   spr: {fileID: 1040049518}
   anim: {fileID: 1040049514}
   playerHeight: 0.6
+  data: {fileID: 1040049520}
 --- !u!212 &1040049518
 SpriteRenderer:
   serializedVersion: 2

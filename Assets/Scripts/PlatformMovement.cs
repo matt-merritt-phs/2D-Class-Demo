@@ -8,6 +8,7 @@ public class PlatformMovement : MonoBehaviour
     public SpriteRenderer spr;
     public Animator anim;
     public float playerHeight;
+    public PlayerData data;
 
     // Do not display this in the editor, the code will manage it
     private int groundLayer = 6;
@@ -38,6 +39,11 @@ public class PlatformMovement : MonoBehaviour
                 rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
                 canJump = false;
             }
+        }
+
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            Debug.Log(data.coinsCollected);
         }
     }
 
@@ -74,12 +80,12 @@ public class PlatformMovement : MonoBehaviour
 
         if (hit)
         {
-            Debug.Log(hit.transform.name);
+            // Debug.Log(hit.transform.name);
             canJump = true;
         }
         else
         {
-            Debug.Log("Nothing was hit.");
+            // Debug.Log("Nothing was hit.");
             canJump = false;
         }
     }
